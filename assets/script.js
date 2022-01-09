@@ -2,6 +2,8 @@ var searchButton = $('#search');
 var textInput = $('#searchTerm');
 var todayBox = document.querySelector('#cityMain');
 var resultsPanel = $('#results-panel');
+var cityHistory = $('#cityHistory');
+var histBtn = $('.hist')
 var lat;
 var lon;
 var search;
@@ -9,9 +11,8 @@ var search;
 var APIKey = "986d3b239b9a3b7ebfe92d09a3750fbc";
 
 
-function getWeather(){
 
-    search = textInput.val();
+function weatherAPI(search){
     var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + search + "&appid=" + APIKey;
     fetch(weatherURL)
 
@@ -28,7 +29,18 @@ function getWeather(){
             lon = data.coord.lon;
             console.log(lat, lon);
             oneCall();
-        });
+        }); 
+}
+
+function getWeather(){
+
+    search = textInput.val();
+    var savedSearches = JSON.parse(localStorage.getItem('history'));
+    if (savedSearches==null) savedSearches=[];
+    savedSearches.push(search);
+    localStorage.setItem("history", JSON.stringify(savedSearches));
+    makeHistBtn(search);
+    weatherAPI(search);
 
 
 }
@@ -67,7 +79,8 @@ function oneCall(){
                 <p>Humidity: ${data.current.humidity} %</p>
                 <p>UV Index: ${data.current.uvi}</p>`;
             todayBox.innerHTML = templateMain;
-
+            
+            resultsPanel.empty();
             for(i=1; i<6; i++){
                 var unixDt = data.daily[i].dt;
                 var dateI= new Date(unixDt * 1000);
@@ -90,10 +103,39 @@ function oneCall(){
                     <p>Wind: ${data.daily[i].wind_speed} MPH</p>
                     <p>Humidity: ${data.daily[i].humidity} %</p>
                 </div>`;
+
                 resultsPanel.append($(templateI));
             }
         });
         
 }
+function makeHistBtn(place){
+    templateHistory = 
+        `<div>
+        <input type="button" class="hist" value="${place}" onclick="weatherAPI('${place}')"/>
+        </div>`;
+        cityHistory.append($(templateHistory));
+}
 
+function fillHistory(){
+    var savedSearches = JSON.parse(localStorage.getItem('history'));
+    cityHistory.innerHTML = "";
+    if(!savedSearches) {
+        return;
+    }
+    var histLength = savedSearches.length - 1;
+    for(var i=histLength; i>=0; i--){
+        var place = savedSearches[i];
+        makeHistBtn(place);
+    }
+}
+
+histBtn.click(function(event){
+  let button = $(event.target);
+  let value = button.val();
+  weatherAPI(value);  
+})
+
+fillHistory();
 searchButton.click(getWeather);
+//histBtn.addEventListener("click", weatherAPI(histBtn.val()));

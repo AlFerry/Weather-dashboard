@@ -17,8 +17,17 @@ border-radius: 0 5000px 5000px 0;
 font-size: 0.8rem;
 }
 .side-bar {
+    display: inline-block;
+    width: 15%;
     position: fixed;
     margin-top: 6rem;
+    height:100%
+}
+#cityMain{
+    width: 80%;
+    float: right;
+    margin-top: 6rem;
+    height: 40%;
 }
 .headline {
     background-color: var(--primary);
@@ -33,9 +42,13 @@ font-size: 0.8rem;
     text-align: center;
     color: rgb(29, 29, 44);
     font-weight: bold;
-    font-family:'Permanent Marker';
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     letter-spacing: 2px;
 }
-main{
-    margin-top: 6rem;
+#results-panel {
+    display:flex;
+    flex-wrap: nowrap;
+    float: left;
+    margin-left: 25%;
 }
+  

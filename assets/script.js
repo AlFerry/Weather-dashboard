@@ -1,3 +1,4 @@
+// Define global variables
 var searchButton = $('#search');
 var textInput = $('#searchTerm');
 var todayBox = document.querySelector('#cityMain');
@@ -11,7 +12,7 @@ var search;
 var APIKey = "986d3b239b9a3b7ebfe92d09a3750fbc";
 
 
-
+// Calls basic weather API to get Lat/Long coordinates from city input given by user
 function weatherAPI(search){
     var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + search + "&appid=" + APIKey;
     fetch(weatherURL)
@@ -31,7 +32,7 @@ function weatherAPI(search){
             oneCall(search);
         }); 
 }
-
+// Function to put current search in history using local storage
 function getWeather(){
 
     search = textInput.val();
@@ -44,7 +45,7 @@ function getWeather(){
 
 
 }
-
+// uses onecall API to retrieve current/forcasted weather for given city
 function oneCall(search){
 
     var oneURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey +"&units=imperial";
@@ -74,7 +75,7 @@ function oneCall(search){
             else if(uvi <=5){
                 UVColor="yellow";
             }else{UVColor="red";}
-    
+            // Displays current weather on webpage
             var templateMain = 
                 `<h2>${search} (${dispDate})<img id="wicon" src="${iconUrl}"></h2>
                 <p>Temp: ${data.current.temp}&degF</p>
@@ -82,7 +83,7 @@ function oneCall(search){
                 <p>Humidity: ${data.current.humidity} %</p>
                 <p>UV Index: <span style="background-color:${UVColor}; border-radius:10px; padding: 2px 3px">${data.current.uvi}</span></p>`;
             todayBox.innerHTML = templateMain;
-            
+            // Displays 5-day forcast
             resultsPanel.empty();
             for(i=1; i<6; i++){
                 var unixDt = data.daily[i].dt;
@@ -112,6 +113,7 @@ function oneCall(search){
         });
         
 }
+// Displays previously searched cities as buttons
 function makeHistBtn(place){
     templateHistory = 
         `<div class="btn-rnd">
@@ -120,6 +122,7 @@ function makeHistBtn(place){
         cityHistory.append($(templateHistory));
 }
 
+// Gets history from local storage
 function fillHistory(){
     var savedSearches = JSON.parse(localStorage.getItem('history'));
     cityHistory.innerHTML = "";
@@ -133,11 +136,13 @@ function fillHistory(){
     }
 }
 
+//When a user clicks a previously-searched city it is searched again
 histBtn.click(function(event){
   let button = $(event.target);
   let value = button.val();
   weatherAPI(value);  
 })
+// Changes menu to be mobile-friendly
 function myFunction(x) {
     $(".mobile-menu").toggleClass("menu-hidden", 800, "easeOutQuint");
   };

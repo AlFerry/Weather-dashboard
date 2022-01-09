@@ -1,3 +1,4 @@
+/* Basic styling and global color variables */
 :root{
     --primary: rgb(90, 140, 205);
     --background: rgb(192, 203, 214);
@@ -8,6 +9,7 @@ body{
     background-color: var(--background);
     height: 100vh;
 }
+/* Style search pannel including search bar and old searches */
 .input-group-rounded .input-group-field {
     border-radius: 5000px 0px 0px 5000px;
     padding-left: 1rem;
@@ -49,6 +51,7 @@ background-color: var(--accent);
     font-family: Arial, Helvetica, sans-serif;
 
 }
+/* Style current weather display */
 #cityMain{
     width: 80%;
     float: left;
@@ -58,6 +61,7 @@ background-color: var(--accent);
     background-color: var(--primary);
     margin-bottom: 3rem;
 }
+/* Style heading of page */
 .headline {
     background-color: var(--primary);
     height: 5rem;
@@ -75,6 +79,7 @@ background-color: var(--accent);
     font-family: Arial, Helvetica, sans-serif
     letter-spacing: 2px;
 }
+/*style daily weather forcasts*/
 #results-panel {
     display:flex;
     flex-wrap: nowrap;
@@ -85,7 +90,7 @@ background-color: var(--accent);
 .card{
     min-width: 180px;
 }
-  
+  /*Start wrapping daily weather to remain llegible on smaller screen*/
 @media screen and (max-width:1790px) {
     #results-panel {
       flex-wrap: wrap;
@@ -96,6 +101,7 @@ background-color: var(--accent);
         margin-right: 20rem;
     }
 }
+/*Change display to mobile-friendly*/
 @media screen and (max-width:750px) {
     .side-bar {
       position: relative;
@@ -115,13 +121,12 @@ background-color: var(--accent);
         width:90%;
         margin-left: 5%;
     }
-    /*============================== Hamburger Menu ============================*/
-    /* Style Hamburger*/
+    /* Style Hamburger menu and disable other menu*/
     .bar1, .bar3 {
       display: inline-block;
       width: 35px;
       height: 5px;
-      background-color: #333;
+      background-color: var(--accent);
       margin: 6px 0;
       transition: 0.4s;
     }
@@ -130,14 +135,13 @@ background-color: var(--accent);
       vertical-align: middle;
       width: 35px;
       height: 5px;
-      background-color: #333;
+      background-color: var(--accent);
       font-size: 1.2em;
       margin-top: -8px;
       margin-bottom: 0px;
       transition: 0.4s;
     }
   
-    /*========= Mobile Menu ==================*/
     .menu-hidden{
       display: none;
     }

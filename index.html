@@ -15,7 +15,14 @@
     </header>
    
     <main>
+
         <aside id="cityPicker" class="side-bar">
+            <div class="container center " onclick="myFunction(this)" >
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div class="menu-hidden mobile-menu">
             <h4 style="margin-left: 3%;">Search for a city:</h4>
             <div class="input-group input-group-rounded">
                 <input class="input-group-field" type="search" id="searchTerm">
@@ -25,15 +32,16 @@
             </div>
             <div id="cityHistory">
                 <!--Previously Searched cities go here-->
-                listy list
             </div>
+            </div> 
         </aside>
+      
 
         <section id="cityMain">
             <!--Curent info for city goes here-->
         </section>
         
-        <section id="results-panel" class="grid-container-fluid grid-x grid-padding-x grid-padding-y grid-margin-x align-right">
+        <section id="results-panel" class="grid-container-fluid grid-x grid-padding-x grid-padding-y grid-margin-x align-left">
             <!-- Five day forcast goes here -->
         </div>
     </main>

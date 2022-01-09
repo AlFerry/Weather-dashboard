@@ -28,7 +28,7 @@ function weatherAPI(search){
             lat = data.coord.lat;
             lon = data.coord.lon;
             console.log(lat, lon);
-            oneCall();
+            oneCall(search);
         }); 
 }
 
@@ -45,7 +45,7 @@ function getWeather(){
 
 }
 
-function oneCall(){
+function oneCall(search){
 
     var oneURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey +"&units=imperial";
     fetch(oneURL)
@@ -62,22 +62,25 @@ function oneCall(){
             console.log(UnixTime);
             var date= new Date(UnixTime * 1000);
             console.log(date);
-            var day = "0" + date.getDate();
+            var day=date.getDate();
             var month = date.getMonth() + 1;
             var year = date.getFullYear();
             var dispDate = month + "/" + day + "/" + year;
             var iconUrl = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
-            //date=JSON.stringify(date);
-            console.log(typeof date);
-            console.log(month);
-            console.log(dispDate);
-            console.log(data.daily);
+            var uvi=data.current.uvi;
+            if(uvi <= 2){
+                    UVColor="green";
+            }
+            else if(uvi <=5){
+                UVColor="yellow";
+            }else{UVColor="red";}
+    
             var templateMain = 
                 `<h2>${search} (${dispDate})<img id="wicon" src="${iconUrl}"></h2>
                 <p>Temp: ${data.current.temp}&degF</p>
                 <p>Wind: ${data.current.wind_speed} MPH</p>
                 <p>Humidity: ${data.current.humidity} %</p>
-                <p>UV Index: ${data.current.uvi}</p>`;
+                <p>UV Index: <span style="background-color:${UVColor}; border-radius:10px; padding: 2px 3px">${data.current.uvi}</span></p>`;
             todayBox.innerHTML = templateMain;
             
             resultsPanel.empty();
@@ -85,7 +88,7 @@ function oneCall(){
                 var unixDt = data.daily[i].dt;
                 var dateI= new Date(unixDt * 1000);
                 console.log(dateI);
-                var dayI = "0" + dateI.getDate();
+                var dayI =dateI.getDate();
                 var monthI = dateI.getMonth() + 1;
                 var yearI = dateI.getFullYear();
                 var dispDateI = monthI + "/" + dayI + "/" + yearI;
@@ -111,7 +114,7 @@ function oneCall(){
 }
 function makeHistBtn(place){
     templateHistory = 
-        `<div>
+        `<div class="btn-rnd">
         <input type="button" class="hist" value="${place}" onclick="weatherAPI('${place}')"/>
         </div>`;
         cityHistory.append($(templateHistory));
@@ -135,7 +138,10 @@ histBtn.click(function(event){
   let value = button.val();
   weatherAPI(value);  
 })
+function myFunction(x) {
+    $(".mobile-menu").toggleClass("menu-hidden", 800, "easeOutQuint");
+  };
 
 fillHistory();
 searchButton.click(getWeather);
-//histBtn.addEventListener("click", weatherAPI(histBtn.val()));
+

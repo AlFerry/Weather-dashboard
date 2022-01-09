@@ -1,6 +1,7 @@
 :root{
     --primary: rgb(90, 140, 205);
     --background: rgb(192, 203, 214);
+    --accent: #2F394D;
 }
 
 body{
@@ -15,19 +16,47 @@ body{
 .input-group-rounded .input-group-button .button {
 border-radius: 0 5000px 5000px 0;
 font-size: 0.8rem;
+background-color: var(--accent);
 }
 .side-bar {
     display: inline-block;
     width: 15%;
+    min-width: 162px;
     position: fixed;
     margin-top: 6rem;
     height:100%
 }
+.btn-rnd{
+    border: 0;
+    background-color: var(--accent);
+    margin-bottom: 1rem;
+    border-radius: 1000px;
+    padding: .5rem 1rem;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: all 0.35s ease;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+}
+.hist{
+    color:white;
+    border: 0;
+    background-color: var(--accent);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
 #cityMain{
     width: 80%;
-    float: right;
+    float: left;
+    margin-left: 20rem;
     margin-top: 6rem;
     height: 40%;
+    background-color: var(--primary);
+    margin-bottom: 3rem;
 }
 .headline {
     background-color: var(--primary);
@@ -37,12 +66,13 @@ font-size: 0.8rem;
     left: 0;
     position: fixed;
     overflow: auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .headline h1{
     text-align: center;
-    color: rgb(29, 29, 44);
+    color: black;
     font-weight: bold;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Arial, Helvetica, sans-serif
     letter-spacing: 2px;
 }
 #results-panel {
@@ -50,5 +80,65 @@ font-size: 0.8rem;
     flex-wrap: nowrap;
     float: left;
     margin-left: 25%;
+    margin-right: 5%;
+}
+.card{
+    min-width: 180px;
 }
   
+@media screen and (max-width:1790px) {
+    #results-panel {
+      flex-wrap: wrap;
+      width:70%;
+      justify-content: space-between;
+    }
+    #cityMain{
+        margin-right: 20rem;
+    }
+}
+@media screen and (max-width:750px) {
+    .side-bar {
+      position: relative;
+      width: 90%;
+    }
+    #cityMain{
+        width: 90%;
+        align-self: center;
+        margin: 2rem;
+    }
+    .card{
+        width: 100%;
+        align-self: center;
+        margin-bottom: 2rem;
+    }
+    #results-panel{
+        width:90%;
+        margin-left: 5%;
+    }
+    /*============================== Hamburger Menu ============================*/
+    /* Style Hamburger*/
+    .bar1, .bar3 {
+      display: inline-block;
+      width: 35px;
+      height: 5px;
+      background-color: #333;
+      margin: 6px 0;
+      transition: 0.4s;
+    }
+    .bar2{
+      cursor: pointer;
+      vertical-align: middle;
+      width: 35px;
+      height: 5px;
+      background-color: #333;
+      font-size: 1.2em;
+      margin-top: -8px;
+      margin-bottom: 0px;
+      transition: 0.4s;
+    }
+  
+    /*========= Mobile Menu ==================*/
+    .menu-hidden{
+      display: none;
+    }
+  }

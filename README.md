@@ -16,4 +16,4 @@ When a user views the site on a mobile device, the search menu will collapse to 
 [Live URL] (https://alferry.github.io/Weather-dashboard/)
 
 Image of webpage:
-![Image of Weather Dashboard] (./assets/Screenshot.png)
+![Image of Weather Dashboard] (/Screenshot.PNG)

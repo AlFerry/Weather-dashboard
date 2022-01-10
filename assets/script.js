@@ -38,10 +38,11 @@ function getWeather(){
     search = textInput.val();
     var savedSearches = JSON.parse(localStorage.getItem('history'));
     if (savedSearches==null) savedSearches=[];
+    if(search!=""){
     savedSearches.push(search);
     localStorage.setItem("history", JSON.stringify(savedSearches));
     makeHistBtn(search);
-    weatherAPI(search);
+    weatherAPI(search);}
 
 
 }

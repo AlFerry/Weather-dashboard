@@ -14,7 +14,7 @@ var APIKey = "986d3b239b9a3b7ebfe92d09a3750fbc";
 
 // Calls basic weather API to get Lat/Long coordinates from city input given by user
 function weatherAPI(search){
-    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + search + "&appid=" + APIKey;
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + search + "&appid=" + APIKey;
     fetch(weatherURL)
 
         .then(function (response) {

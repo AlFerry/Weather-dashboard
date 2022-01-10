@@ -12,3 +12,8 @@ The dashboard will also display a five-day forecast showing daily temperatures, 
 When a user resizes their browser window, the display will adjust to ensure forecasts are legible.
 
 When a user views the site on a mobile device, the search menu will collapse to a hamburger menu, and the current/forecasted weather will all be shown in a column.
+
+[Live URL] (https://alferry.github.io/Weather-dashboard/)
+
+Image of webpage:
+![Image of Weather Dashboard] (./assets/Screenshot.png)
